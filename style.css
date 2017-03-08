@@ -9,3 +9,11 @@ body {
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(45deg, #f7f7f7 0%, #EAE0D5 100%);
 }
+
+a {
+  background-color: #000000;
+  background-position: left left;
+  height: 200px;
+  width: 200px;
+ /* background-position:center ;*/
+}
