@@ -3,7 +3,11 @@ var flowers = [];
 var drops = [];
 
 function setup() {
-createCanvas(600,400);
+
+var cnv = createCanvas(600,400);
+ var x = (windowWidth - width) / 2;
+ var y = (windowHeight - height+400) / 2;
+ cnv.position(x, y);
 ship = new Ship();//instance
 //drops = new Drop(width/2,height/2);
 for(var i = 0; i < 6; i++){
@@ -17,7 +21,7 @@ function draw() {
   background(51);
    console.log("hit");
   ship.show();
- 
+
   for(var i = 0;i< drops.length;i++){
        drops[i].show();
        drops[i].move();
@@ -26,14 +30,14 @@ function draw() {
             console.log("hit");
          }
        }
-       
+
 
   }
    for(var i = 0;i<flowers.length;i++){
        flowers[i].show();
   }
-  
-  
+
+
 
 
 
@@ -51,6 +55,6 @@ function keyPressed(){
   }else if (keyCode === LEFT_ARROW){
     ship.move(-1);
   }
-  
+
 
 }
