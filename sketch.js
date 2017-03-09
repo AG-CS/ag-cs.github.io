@@ -5,12 +5,12 @@ var drops = [];
 function setup() {
 
 var cnv = createCanvas(600,400);
- var x = (windowWidth - width) / 2;
- var y = (windowHeight - height+400) / 2;
- cnv.position(x, y);
+var x = (windowWidth + width) / 2;
+var y = (windowHeight - height) / 12;
+cnv.position(x, y);
 ship = new Ship();//instance
 //drops = new Drop(width/2,height/2);
-for(var i = 0; i < 6; i++){
+for(var i = 0; i < 7; i++){
    flowers[i] = new Flower(i*80+80,60);
 }
 
@@ -18,8 +18,8 @@ for(var i = 0; i < 6; i++){
 }
 
 function draw() {
-  background(51);
-   console.log("hit");
+  background(0);
+  console.log("hit");
   ship.show();
 
   for(var i = 0;i< drops.length;i++){
@@ -27,14 +27,32 @@ function draw() {
        drops[i].move();
        for(var j = 0;j<flowers.length;j++){
          if(drops[i].hits(flowers[j])){
+             flowers[j].grow();
+            drops[i].evaporate();
+
             console.log("hit");
+
          }
        }
 
 
   }
+
+
+
+
+
+
+
    for(var i = 0;i<flowers.length;i++){
        flowers[i].show();
+  }
+  for(var i = 0;i< drops.length;i++){
+      if(drops[i].toDelete){
+         // drops[i] = '';
+         drops.splice(i,1);
+          //drops[i].y = 0;
+      }
   }
 
 
@@ -43,6 +61,14 @@ function draw() {
 
 }
 //array for flowers
+function keyReleased(){
+    if(key != ' '){
+        ship.setDir(0);
+    }
+}
+
+
+
 //array for water
 function keyPressed(){
    if(key === ' ')
@@ -51,9 +77,9 @@ function keyPressed(){
      drops.push(drop);
   }
   if(keyCode === RIGHT_ARROW){
-    ship.move(1);
+    ship.setDir(5);
   }else if (keyCode === LEFT_ARROW){
-    ship.move(-1);
+    ship.setDir(-5);
   }
 
 
